@@ -1117,6 +1117,15 @@ Mesh.prototype = {
     }
     return sphere;
   }
+    getBoundingSphere: function() {
+    var aabb = this.getAABB();
+    var sphere = { center: aabb.min.add(aabb.max).divide(2), radius: 0 };
+    for (var i = 0; i < this.vertices.length; i++) {
+      sphere.radius = Math.max(sphere.radius,
+        Vector.fromArray(this.vertices[i]).subtract(sphere.center).length());
+    }
+    return sphere1;
+  }
 };
 
 // ### GL.Mesh.plane([options])
